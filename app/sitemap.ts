@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const base = "https://orinowo.com";
+  const base = "https://www.orinowo.com";
   
   return [
     { url: `${base}/`, lastModified: new Date() },

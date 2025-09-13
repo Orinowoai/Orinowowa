@@ -3,11 +3,11 @@ import "./globals.css";
 export const metadata = {
   title: "Orinowo — AI Music Studio | Create, Compete, Monetize",
   description: "First-of-its-kind culture-forward AI music studio. Afrobeats, Drill, Lofi & more.",
-  metadataBase: new URL("https://orinowo.com"),
+  metadataBase: new URL("https://www.orinowo.com"),
   openGraph: {
     title: "Orinowo — Luxury AI Music Studio",
     description: "Create culture-first tracks in seconds. Compete globally. Monetize.",
-    url: "https://orinowo.com",
+    url: "https://www.orinowo.com",
     siteName: "Orinowo",
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
     type: "website"
@@ -18,7 +18,7 @@ export const metadata = {
     creator: "@orinowo" 
   },
   alternates: { 
-    canonical: "https://orinowo.com" 
+    canonical: "https://www.orinowo.com" 
   }
 };
 
@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org", 
               "@type": "Organization",
               name: "Orinowo", 
-              url: "https://orinowo.com",
+              url: "https://www.orinowo.com",
               sameAs: ["https://x.com/orinowo", "https://instagram.com/orinowo"],
               brand: { "@type": "Brand", name: "Orinowo" }
             })

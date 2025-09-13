@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { 
+  color-scheme: dark; 
+}
+
+body { 
+  @apply bg-deepBlack text-white antialiased; 
+}
+
+a { 
+  @apply hover:text-luxuryGold transition-colors; 
+}
+
+.btn { 
+  @apply inline-flex items-center justify-center px-4 py-2 rounded font-semibold; 
+}
+
+.btn-gold { 
+  @apply btn bg-luxuryGold text-black hover:opacity-90; 
+}
+
+.card { 
+  @apply bg-coal/90 border border-luxuryGold/30 rounded-lg p-5; 
+}

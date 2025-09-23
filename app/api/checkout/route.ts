@@ -1,32 +1,30 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-// Initialise Stripe with your secret key
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-apiVersion: "2023-08-16",
+apiVersion: "2024-06-20", // stable Stripe API version
 });
 
 export async function POST(req: Request) {
 try {
-const { priceId } = await req.json();
+const { priceId } = await req.json(); // client will send the correct priceId (Starter/Pro/Elite)
 
-// Create a Checkout session
 const session = await stripe.checkout.sessions.create({
 payment_method_types: ["card"],
+mode: "subscription",
 line_items: [
 {
-price: process.env[priceId], // e.g. process.env.STARTER_PRICE_ID
+price: priceId,
 quantity: 1,
 },
 ],
-mode: "subscription",
-success_url: `${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+success_url: `${process.env.NEXT_PUBLIC_URL}/success`,
 cancel_url: `${process.env.NEXT_PUBLIC_URL}/pricing`,
 });
 
-return NextResponse.json({ sessionId: session.id });
+return NextResponse.json({ url: session.url });
 } catch (err: any) {
-console.error("Stripe checkout error:", err);
+console.error("Stripe checkout error:", err.message);
 return NextResponse.json({ error: err.message }, { status: 500 });
 }
 }

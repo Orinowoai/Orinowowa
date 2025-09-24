@@ -1,10 +1,10 @@
 export default function CancelPage() {
 return (
-<div style={{ padding: "40px", textAlign: "center", color: "white" }}>
+<div style={{ padding: "2rem", textAlign: "center", color: "white" }}>
 <h1>❌ Payment Cancelled</h1>
-<p>Your checkout was cancelled. No worries — you can try again anytime.</p>
-<a href="/pricing" style={{ color: "#FFD700", marginTop: "20px", display: "inline-block" }}>
-Go back to pricing
+<p>Your checkout was canceled. You can try again anytime.</p>
+<a href="/pricing" style={{ marginTop: "1rem", display: "inline-block", color: "#FFD700" }}>
+Back to pricing
 </a>
 </div>
 );

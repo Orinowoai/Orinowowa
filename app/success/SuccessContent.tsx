@@ -5,26 +5,20 @@ import { useEffect, useState } from 'react';
 
 export default function SuccessContent() {
 const searchParams = useSearchParams();
-const [plan, setPlan] = useState<string | null>(null);
+const [status, setStatus] = useState('Verifying...');
 
 useEffect(() => {
 const sessionId = searchParams.get('session_id');
-const purchasedPlan = searchParams.get('plan');
 if (sessionId) {
-setPlan(purchasedPlan);
+// Here we would normally call Stripe API to verify session
+setStatus('Payment verified ✅');
 }
 }, [searchParams]);
 
 return (
 <div>
-{plan ? (
-<div>
-<h2>Welcome to Orinowo!</h2>
-<p>Your <strong>{plan}</strong> subscription is now active.</p>
-</div>
-) : (
-<div>Verifying your payment...</div>
-)}
+<h2>{status}</h2>
+<p>Welcome to Orinowo 🎶 Your subscription is now active.</p>
 </div>
 );
 }

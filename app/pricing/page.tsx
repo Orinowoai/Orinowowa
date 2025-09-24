@@ -1,65 +1,88 @@
 "use client";
 
-import { loadStripe } from "@stripe/stripe-js";
+import { useState } from "react";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+export default function PricingPage() {
+const [loading, setLoading] = useState(false);
+
+async function handleCheckout(plan: string) {
+try {
+setLoading(true);
+const res = await fetch("/api/checkout", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ plan }),
+});
+
+const data = await res.json();
+if (data.url) {
+window.location.href = data.url;
+} else {
+alert("Something went wrong creating the checkout session.");
+}
+} catch (err) {
+console.error("Checkout error:", err);
+alert("Something went wrong. Please try again.");
+} finally {
+setLoading(false);
+}
+}
 
 const plans = [
 {
 name: "Starter",
 price: "£4.99/mo",
-env: process.env.STARTER_PRICE_ID!,
 perks: ["200 generations", "Basic rights"],
 },
 {
 name: "Pro",
 price: "£9.99/mo",
-env: process.env.PRO_PRICE_ID!,
 perks: ["800 generations", "Extended rights"],
 },
 {
 name: "Elite",
 price: "£19.99/mo",
-env: process.env.ELITE_PRICE_ID!,
-perks: ["Unlimited", "Commercial rights"],
+perks: ["Unlimited generations", "Commercial rights"],
 },
 ];
 
-export default function PricingPage() {
-const handleCheckout = async (priceId: string, planName: string) => {
-const stripe = await stripePromise;
-
-const res = await fetch("/api/checkout", {
-method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify({ priceId, planName }),
-});
-
-const session = await res.json();
-
-if (stripe) {
-await stripe.redirectToCheckout({ sessionId: session.id });
-}
-};
-
 return (
-<div style={{ padding: "2rem", textAlign: "center" }}>
+<div style={{ padding: "40px", color: "white", textAlign: "center" }}>
 <h1>Choose Your Plan</h1>
-<div style={{ display: "flex", justifyContent: "center", gap: "2rem" }}>
+<div style={{ display: "flex", gap: "20px", justifyContent: "center", marginTop: "30px" }}>
 {plans.map((plan) => (
-<div key={plan.name} style={{ border: "1px solid #ccc", padding: "1rem", borderRadius: "8px" }}>
+<div
+key={plan.name}
+style={{
+border: "1px solid #555",
+borderRadius: "8px",
+padding: "20px",
+width: "250px",
+backgroundColor: "#111",
+}}
+>
 <h2>{plan.name}</h2>
 <p>{plan.price}</p>
-<ul>
-{plan.perks.map((perk) => (
-<li key={perk}>{perk}</li>
+<ul style={{ listStyle: "none", padding: 0 }}>
+{plan.perks.map((perk, i) => (
+<li key={i}>{perk}</li>
 ))}
 </ul>
 <button
-onClick={() => handleCheckout(plan.env, plan.name)}
-style={{ marginTop: "1rem", padding: "0.5rem 1rem", background: "black", color: "white", borderRadius: "4px" }}
+onClick={() => handleCheckout(plan.name)}
+disabled={loading}
+style={{
+marginTop: "15px",
+padding: "10px 20px",
+background: "#FFD700",
+color: "#000",
+border: "none",
+borderRadius: "5px",
+cursor: "pointer",
+fontWeight: "bold",
+}}
 >
-Subscribe
+{loading ? "Processing..." : "Subscribe"}
 </button>
 </div>
 ))}

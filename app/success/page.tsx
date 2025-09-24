@@ -1,18 +1,15 @@
-"use client";
+import { Suspense } from 'react';
+import SuccessContent from './SuccessContent';
 
-import { useSearchParams } from "next/navigation";
-
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic'; // 🔑 Prevents static build errors
 
 export default function SuccessPage() {
-const searchParams = useSearchParams();
-const plan = searchParams.get("plan");
-
 return (
-<div style={{ padding: "2rem", textAlign: "center" }}>
-<h1>🎉 Payment Successful!</h1>
-<p>Thank you for subscribing.</p>
-{plan && <p>You purchased the <strong>{plan}</strong> plan.</p>}
+<div className="success-page">
+<h1>Payment Successful</h1>
+<Suspense fallback={<div>Loading payment details...</div>}>
+<SuccessContent />
+</Suspense>
 </div>
 );
 }

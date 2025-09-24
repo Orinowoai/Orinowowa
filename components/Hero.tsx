@@ -12,7 +12,7 @@ export default function Hero() {
           Create culture-first tracks in seconds. Compete globally. Monetize your sound.
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <a className="btn-gold" href="/pricing">Subscribe from £4.99</a>
+          <a className="btn-gold" href="/plans">Subscribe from £4.99</a>
           <a className="btn border border-luxuryGold" href="/leaderboard">View Leaderboard</a>
           <a className="btn border border-luxuryGold" href="/spotlight">Weekly Spotlight</a>
         </div>

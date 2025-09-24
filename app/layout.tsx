@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="/" className="text-2xl font-bold text-luxuryGold">Orinowo</a>
             <nav className="flex gap-6">
-              <a href="/pricing">Pricing</a>
+              <a href="/plans">Pricing</a>
               <a href="/leaderboard">Leaderboard</a>
               <a href="/spotlight">Spotlight</a>
               <a href="/blog">Blog</a>

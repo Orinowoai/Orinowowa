@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-// @ts-expect-error ignore type mismatch on apiVersion
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+// Force Stripe to be loosely typed (bypass apiVersion typing issue)
+const stripe = new (Stripe as any)(process.env.STRIPE_SECRET_KEY as string, {
 apiVersion: "2023-08-16",
 });
 

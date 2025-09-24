@@ -1,4 +1,11 @@
-export default function PricingCard({ plan, price, features, popular }) {
+interface PricingCardProps {
+  plan: string;
+  price: string;
+  features: string[];
+  popular?: boolean;
+}
+
+export default function PricingCard({ plan, price, features, popular }: PricingCardProps) {
   return (
     <div className={`relative glass rounded-2xl p-8 shadow-gold border-2 ${popular ? 'border-gold' : 'border-bronze'}`}>
       {popular && (

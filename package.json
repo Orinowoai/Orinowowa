@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "2.2.0",
+    "framer-motion": "^12.23.21",
     "next": "^15.5.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",

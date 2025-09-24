@@ -1,6 +1,16 @@
 import { FaCrown } from "react-icons/fa";
 
-export default function Leaderboard({ users }) {
+interface User {
+  id: string | number;
+  name: string;
+  xp: number;
+}
+
+interface LeaderboardProps {
+  users: User[];
+}
+
+export default function Leaderboard({ users }: LeaderboardProps) {
   return (
     <div className="glass rounded-2xl p-6 shadow-gold">
       <h2 className="text-gold font-luxury text-2xl mb-4">Leaderboard</h2>

@@ -3,20 +3,17 @@
 import { useSearchParams } from "next/navigation";
 
 export default function SuccessPage() {
-const params = useSearchParams();
-const plan = params.get("plan");
+const searchParams = useSearchParams();
+const plan = searchParams.get("plan");
 
 return (
-<div style={{ padding: "2rem", textAlign: "center", color: "white" }}>
-<h1>🎉 Payment Successful!</h1>
+<div style={{ textAlign: "center", marginTop: "100px" }}>
+<h1>✅ Payment Successful!</h1>
 {plan ? (
-<p>Your <strong>{plan}</strong> plan is now active.</p>
+<p>You have successfully subscribed to the <strong>{plan}</strong> plan.</p>
 ) : (
-<p>Your subscription was successful.</p>
+<p>Subscription successful. Thank you for your purchase!</p>
 )}
-<a href="/" style={{ marginTop: "1rem", display: "inline-block", color: "#FFD700" }}>
-Go Home
-</a>
 </div>
 );
 }

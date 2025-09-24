@@ -3,8 +3,8 @@
 type Row = { label: string; value: number };
 
 export default function BarChart({ rows }: { rows: Row[] }) {
-  const max = Math.max(...rows.map(r => r.value), 1);
-  
+  const max = Math.max(...rows.map((r) => r.value), 1);
+
   return (
     <div className="space-y-3">
       {rows.map((r, i) => (
@@ -18,9 +18,9 @@ export default function BarChart({ rows }: { rows: Row[] }) {
               </span>
             </div>
             <div className="h-2 bg-white/10 rounded mt-1">
-              <div 
-                className="h-2 bg-luxuryGold rounded" 
-                style={{ width: `${(r.value / max) * 100}%` }} 
+              <div
+                className="h-2 bg-luxuryGold rounded"
+                style={{ width: `${(r.value / max) * 100}%` }}
               />
             </div>
           </div>

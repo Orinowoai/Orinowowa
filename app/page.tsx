@@ -1,41 +1,33 @@
-import Hero from "@/components/Hero";
-import BarChart from "@/components/BarChart";
+import KPIStrip from "@/components/KPIStrip";
+import Leaderboard from "@/components/Leaderboard";
+import WeeklySongs from "@/components/WeeklySongs";
+import Sponsors from "@/components/Sponsors";
+import Reviews from "@/components/Reviews";
 
 export default function HomePage() {
-  const rows = [
-    { label: "DJ Gold", value: 15000 },
-    { label: "AfroKing", value: 14200 },
-    { label: "LoFiQueen", value: 13800 },
-    { label: "TrapLord", value: 12900 },
-    { label: "SynthStar", value: 12100 },
-    { label: "NeoDriller", value: 11800 }
-  ];
-
   return (
-    <>
-      <Hero />
-      <section className="max-w-6xl mx-auto px-6 py-14">
-        <h2 className="text-3xl font-bold text-luxuryGold">Weekly Leaderboard (seeded)</h2>
-        <p className="opacity-80">Artificially curated to kickstart healthy competition and retention.</p>
-        <div className="mt-6">
-          <BarChart rows={rows} />
-        </div>
-
-        <div className="mt-14 grid md:grid-cols-3 gap-6">
-          <div className="card">
-            <h3 className="text-xl font-semibold">Ads & Partners</h3>
-            <p>Subtle placements, CPM/CPA hybrid packages across spotlight/blog.</p>
-          </div>
-          <div className="card">
-            <h3 className="text-xl font-semibold">Investor Ready</h3>
-            <p>Recurring revenue via subscriptions + sponsorship slots.</p>
-          </div>
-          <div className="card">
-            <h3 className="text-xl font-semibold">Legacy Look</h3>
-            <p>Gold/black motif, rotating sponsor strip, testimonials.</p>
-          </div>
-        </div>
+    <main className="max-w-6xl mx-auto px-6 py-10">
+      <section className="rounded-2xl glass gold-border p-10 mb-8">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neonViolet mb-4">
+          Orinowo — Vibrant AI Music Studio
+        </h1>
+        <p className="max-w-3xl text-base text-white/80 mb-6">
+          Cinematic AI music, social gamification, and investor-ready features.
+        </p>
+        <a
+          href="/plans"
+          className="inline-flex items-center rounded-md px-4 py-2 text-sm font-semibold bg-neonPink text-black hover:brightness-110 transition shadow-glow"
+        >
+          Start free
+        </a>
       </section>
-    </>
+      <KPIStrip />
+      <div className="grid md:grid-cols-2 gap-8 mt-8">
+        <Leaderboard />
+        <WeeklySongs />
+      </div>
+      <Sponsors />
+      <Reviews />
+    </main>
   );
 }

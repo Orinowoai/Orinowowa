@@ -3,10 +3,14 @@ import { motion } from "framer-motion";
 interface AchievementBadgeProps {
   icon: React.ReactNode;
   label: string;
-  tier: 'bronze' | 'silver' | 'gold' | 'platinum';
+  tier: "bronze" | "silver" | "gold" | "platinum";
 }
 
-export default function AchievementBadge({ icon, label, tier }: AchievementBadgeProps) {
+export default function AchievementBadge({
+  icon,
+  label,
+  tier,
+}: AchievementBadgeProps) {
   const tierColors = {
     bronze: "bg-bronze text-charcoal",
     silver: "bg-gray-300 text-charcoal",

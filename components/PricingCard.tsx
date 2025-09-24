@@ -5,9 +5,16 @@ interface PricingCardProps {
   popular?: boolean;
 }
 
-export default function PricingCard({ plan, price, features, popular }: PricingCardProps) {
+export default function PricingCard({
+  plan,
+  price,
+  features,
+  popular,
+}: PricingCardProps) {
   return (
-    <div className={`relative glass rounded-2xl p-8 shadow-gold border-2 ${popular ? 'border-gold' : 'border-bronze'}`}>
+    <div
+      className={`relative glass rounded-2xl p-8 shadow-gold border-2 ${popular ? "border-gold" : "border-bronze"}`}
+    >
       {popular && (
         <span className="absolute top-4 right-4 bg-gold text-charcoal px-3 py-1 rounded-full font-bold text-xs shadow-gold">
           Most Popular

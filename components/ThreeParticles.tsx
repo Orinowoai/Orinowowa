@@ -40,5 +40,10 @@ export default function ThreeParticles() {
     };
   }, []);
 
-  return <div ref={mountRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
+  return (
+    <div
+      ref={mountRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+    />
+  );
 }

@@ -22,12 +22,14 @@ A luxury AI music studio built with Next.js 14, Tailwind CSS, and Stripe integra
 ## Getting Started
 
 1. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Set up environment variables**:
    Copy `env.example` to `.env.local` and fill in your Stripe keys:
+
    ```bash
    cp env.example .env.local
    ```
@@ -39,6 +41,7 @@ A luxury AI music studio built with Next.js 14, Tailwind CSS, and Stripe integra
    - Update the environment variables
 
 4. **Run the development server**:
+
    ```bash
    npm run dev
    ```

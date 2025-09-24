@@ -9,12 +9,19 @@ export default function Hero() {
           Orinowo — Luxury AI Music Studio
         </h1>
         <p className="mt-4 text-lg max-w-2xl">
-          Create culture-first tracks in seconds. Compete globally. Monetize your sound.
+          Create culture-first tracks in seconds. Compete globally. Monetize
+          your sound.
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <a className="btn-gold" href="/plans">Subscribe from £4.99</a>
-          <a className="btn border border-luxuryGold" href="/leaderboard">View Leaderboard</a>
-          <a className="btn border border-luxuryGold" href="/spotlight">Weekly Spotlight</a>
+          <a className="btn-gold" href="/plans">
+            Subscribe from £4.99
+          </a>
+          <a className="btn border border-luxuryGold" href="/leaderboard">
+            View Leaderboard
+          </a>
+          <a className="btn border border-luxuryGold" href="/spotlight">
+            Weekly Spotlight
+          </a>
         </div>
         <SponsorStrip />
       </div>

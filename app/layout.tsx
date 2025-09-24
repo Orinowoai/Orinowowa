@@ -24,41 +24,28 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <header className="sticky top-0 z-40 backdrop-blur bg-deepBlack/70 border-b border-luxuryGold/30">
-          <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" className="text-2xl font-bold text-luxuryGold">Orinowo</a>
-            <nav className="flex gap-6">
-              <a href="/plans">Pricing</a>
-              <a href="/leaderboard">Leaderboard</a>
-              <a href="/spotlight">Spotlight</a>
-              <a href="/blog">Blog</a>
-              <a href="/contact">Contact</a>
-            </nav>
-          </div>
+    <html lang="en" className="dark">
+      <body className="min-h-dvh antialiased selection:bg-[rgba(124,58,237,.25)]">
+        <header className="sticky top-0 z-50 glass gold-border">
+          <nav className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <img src="/logo.svg" alt="Orinowo logo" className="h-8 w-8 rounded-full" />
+              <span className="font-semibold tracking-wide text-neonCyan">Orinowo</span>
+            </div>
+            <div className="flex items-center gap-4 text-sm">
+              <a href="/plans" className="hover:opacity-90">Plans</a>
+              <a href="/leaderboard" className="hover:opacity-90">Leaderboard</a>
+              <a href="/spotlight" className="hover:opacity-90">Spotlight</a>
+              <a href="/contact" className="hover:opacity-90">Contact</a>
+              <a href="/plans" className="ml-2 inline-flex items-center rounded-md px-3 py-2 text-sm font-medium bg-neonPink text-black hover:brightness-110 transition">Upgrade</a>
+            </div>
+          </nav>
         </header>
         {children}
-        <footer className="mt-16 border-t border-luxuryGold/30">
-          <div className="max-w-6xl mx-auto px-6 py-8 text-sm opacity-80">
-            © {new Date().getFullYear()} Orinowo • Support: hello@orinowo.com • Ads/Partnerships: partners@orinowo.com
-          </div>
+        <footer className="mx-auto max-w-6xl px-4 py-10 text-xs opacity-70">
+          © {new Date().getFullYear()} Orinowo — Luxury AI Music Studio<br />
+          <span className="block mt-2">Sample content may be shown when live data is unavailable.</span>
         </footer>
-        {/* SEO schema */}
-        <script 
-          type="application/ld+json" 
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org", 
-              "@type": "Organization",
-              name: "Orinowo", 
-              url: "https://www.orinowo.com",
-              sameAs: ["https://x.com/orinowo", "https://instagram.com/orinowo"],
-              brand: { "@type": "Brand", name: "Orinowo" }
-            })
-          }}
-        />
       </body>
     </html>
   );

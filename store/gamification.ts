@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 type User = {
   id: string;
@@ -15,7 +15,7 @@ type State = {
 };
 
 export const useGamification = create<State>((set) => ({
-  user: { id: 'me', name: 'You', xp: 0, achievements: [] },
+  user: { id: "me", name: "You", xp: 0, achievements: [] },
   leaderboard: [],
   addXP: (amount) =>
     set((state) => ({

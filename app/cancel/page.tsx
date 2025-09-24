@@ -1,11 +1,12 @@
+"use client";
+
+export const dynamic = "force-dynamic";
+
 export default function CancelPage() {
 return (
-<div style={{ padding: "2rem", textAlign: "center", color: "white" }}>
+<div style={{ padding: "2rem", textAlign: "center" }}>
 <h1>❌ Payment Cancelled</h1>
-<p>Your checkout was canceled. You can try again anytime.</p>
-<a href="/pricing" style={{ marginTop: "1rem", display: "inline-block", color: "#FFD700" }}>
-Back to pricing
-</a>
+<p>Your checkout was cancelled. Please try again.</p>
 </div>
 );
 }

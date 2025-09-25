@@ -1,6 +1,17 @@
+
 import { createClient } from "@supabase/supabase-js";
 
-export const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-);
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+export const supabase = url && anon
+  ? createClient(url, anon)
+  : {
+      from() {
+        return {
+          select() {
+            return Promise.resolve({ data: [], error: "Missing env", sample: true });
+          },
+        };
+      },
+    };

@@ -1,12 +1,10 @@
 import React from 'react';
 
-export default function Logo({ className = '' }: { className?: string }) {
+export default function Logo({ className = '', size = 32, label = true }: { className?: string; size?: number; label?: boolean }) {
   return (
-    <span className={`flex items-center gap-2 font-bold text-primary text-lg ${className}`} aria-label="Orinowo logo">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M2 12c2-6 6-6 8 0s6 6 8 0" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-      ORINOWO
+    <span className={`flex items-center gap-3 font-bold text-primary text-lg ${className}`} aria-label="Orinowo logo">
+      <img src="/orinowo-logo.svg" alt="Orinowo merch logo" width={size} height={size * 0.67} style={{display:'inline-block',verticalAlign:'middle',borderRadius:'8px'}} />
+      {label && <span className="ml-1">ORINOWO</span>}
     </span>
   );
 }

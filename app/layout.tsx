@@ -1,6 +1,7 @@
 
 import "./globals.css";
 import Logo from "../components/Logo";
+import Footer from "../components/Footer";
 
 export const metadata = {
   title: "Orinowo — AI Music Studio | Create, Compete, Monetize",
@@ -56,22 +57,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="h-1 w-full bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20" />
         </header>
         {children}
-        <footer className="mx-auto max-w-6xl px-4 py-10 text-xs opacity-80">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <span>
-              © {new Date().getFullYear()} Orinowo — Luxury AI Music Studio
-              <br />
-              <a href="mailto:support@orinowo.com" className="underline text-secondary">support@orinowo.com</a>
-            </span>
-            <div className="flex gap-2 items-center">
-              {/* Partner logos row, fallback to sample */}
-              {["/partner1.png","/partner2.png","/partner3.png"].map((src, i) => (
-                <img key={i} src={src} alt="Partner logo" className="h-6 w-6 rounded bg-card border border-white/10" />
-              ))}
-            </div>
-          </div>
-          <span className="block mt-2">Sample content may be shown when live data is unavailable.</span>
-        </footer>
+        <Footer />
+        {/* Footer is now handled by <Footer /> above */}
       </body>
     </html>
   );

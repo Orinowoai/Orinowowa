@@ -7,21 +7,50 @@
 }
 
 body {
-  @apply bg-deepBlack text-white antialiased;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: #0F172A;
+  color: #E5E7EB;
 }
 
 a {
-  @apply hover:text-luxuryGold transition-colors;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+a:hover {
+  text-decoration: underline;
 }
 
 .btn {
-  @apply inline-flex items-center justify-center px-4 py-2 rounded font-semibold;
+  display: inline-block;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(124,58,237,0.08);
+}
+.btn-primary {
+  background: #7C3AED;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #8B5CF6;
+}
+.btn-secondary {
+  background: #06B6D4;
+  color: #fff;
+}
+.btn-accent {
+  background: #F59E0B;
+  color: #fff;
 }
 
-.btn-gold {
-  @apply btn bg-luxuryGold text-black hover:opacity-90;
-}
+
 
 .card {
-  @apply bg-coal/90 border border-luxuryGold/30 rounded-lg p-5;
+  border-radius: 0.75rem;
+  background: rgba(31,41,55,0.90);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 4px 32px 0 rgba(124,58,237,0.08);
 }

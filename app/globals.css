@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
 :root {
   --deep-900: #0b0f1a;
   --deep-800: #10172a;
@@ -12,15 +14,59 @@
   --iris-100: #d4d8ff;
   --iris-200: #bfc6ff;
   --sand: #ede9e3;
+  
+  /* New brand colors */
+  --brand-gold: #F7C94A;
+  --brand-ink: #0E1220;
+  --brand-navy: #131A2A;
+  --brand-violet: #8A7CFF;
+  --brand-cyan: #4DE3FF;
+  --brand-rose: #FF5FA2;
 }
+
 body {
-  background: linear-gradient(
-    135deg,
-    var(--deep-900) 60%,
-    var(--deep-800) 100%
-  );
+  font-family: 'Inter', sans-serif;
+  background: 
+    linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-ink) 100%),
+    radial-gradient(circle at 20% 50%, rgba(138, 124, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(77, 227, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 95, 162, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
   color: var(--sand);
+  position: relative;
 }
+
+/* Subtle particle shimmer effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(1px 1px at 20px 30px, rgba(247, 201, 74, 0.3), transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(138, 124, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(77, 227, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255, 95, 162, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 150px 100px;
+  animation: shimmer 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(150px) translateY(100px); }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+}
+
 a {
   text-underline-offset: 4px;
   text-decoration-thickness: 2px;

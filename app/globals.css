@@ -1,17 +1,10 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-}
-
-body {
-  min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  background: #0F172A;
-  color: #E5E7EB;
-}
+:root{ --brand-start:#7C3AED; --brand-end:#22D3EE; }
+body{ background:#0B1220; color:#fff; }
 
 a {
   text-underline-offset: 4px;

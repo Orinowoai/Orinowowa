@@ -1,3 +1,6 @@
+"use client";
+import DiscoLeaderboard from "@/components/DiscoLeaderboard";
+
 export default function Home() {
   const initials = [
     "AL",
@@ -65,6 +68,8 @@ export default function Home() {
           </p>
         </div>
       </div>
+
+      <DiscoLeaderboard />
 
       <div className="grid md:grid-cols-3 gap-6">
         {[

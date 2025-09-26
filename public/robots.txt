@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://orinowowa.vercel.app/sitemap.xml
+
+# Optimize crawling
+Crawl-delay: 1
+
+# Block sensitive paths (if any in future)
+# Disallow: /admin/
+# Disallow: /api/private/

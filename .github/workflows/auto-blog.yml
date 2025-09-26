@@ -1,0 +1,217 @@
+name: Automated Blog Content
+
+on:
+  schedule:
+    # Run every hour during business hours (9 AM - 6 PM UTC)
+    - cron: '0 9-18 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-blog:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install rss-parser axios fs-extra
+
+    - name: Create blog automation script
+      run: |
+        cat > auto-blog.js << 'EOF'
+        const Parser = require('rss-parser');
+        const axios = require('axios');
+        const fs = require('fs-extra');
+        const path = require('path');
+        
+        const parser = new Parser();
+        
+        // RSS feeds - configurable via environment variable
+        const RSS_FEEDS = (process.env.RSS_FEEDS || 
+          'https://pitchfork.com/rss/news/,https://www.rollingstone.com/music/music-news/feed/,https://www.billboard.com/c/music/music-news/feed/,https://www.musictech.net/feed/,https://www.theverge.com/rss/ai/index.xml,https://techcrunch.com/category/artificial-intelligence/feed/'
+        ).split(',');
+        
+        const CONTENT_DIR = path.join(__dirname, 'content', 'blog');
+        
+        // Ensure content directory exists
+        fs.ensureDirSync(CONTENT_DIR);
+        
+        // Function to sanitize filename
+        function sanitizeFilename(title) {
+          return title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .substring(0, 60);
+        }
+        
+        // Function to extract clean text from HTML
+        function extractText(html) {
+          return html
+            .replace(/<[^>]*>/g, '')
+            .replace(/&nbsp;/g, ' ')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .trim();
+        }
+        
+        // Function to create MDX content
+        function createMDX(item, source) {
+          const title = extractText(item.title || 'Untitled');
+          const description = extractText(item.contentSnippet || item.content || '').substring(0, 200) + '...';
+          const date = new Date(item.pubDate || Date.now()).toISOString();
+          const slug = sanitizeFilename(title);
+          
+          // Try to extract image from content
+          let image = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format';
+          if (item.content) {
+            const imgMatch = item.content.match(/<img[^>]+src="([^"]+)"/);
+            if (imgMatch) {
+              image = imgMatch[1];
+            }
+          }
+          
+          const frontmatter = `---
+title: "${title.replace(/"/g, '\\"')}"
+description: "${description.replace(/"/g, '\\"')}"
+date: "${date}"
+image: "${image}"
+tags: ["AI Music", "Industry News", "Technology"]
+author: "Orinowo"
+source: "${source}"
+canonical: "${item.link || ''}"
+---
+
+# ${title}
+
+*Originally published at [${source}](${item.link || '#'})*
+
+${extractText(item.contentSnippet || item.content || description)}
+
+---
+
+*This article was automatically curated from industry RSS feeds. [View original source](${item.link || '#'})*
+`;
+          
+          return { frontmatter, slug, title, date: new Date(date) };
+        }
+        
+        // Main execution
+        async function updateBlog() {
+          console.log('Starting automated blog update...');
+          
+          const allItems = [];
+          const existingFiles = fs.readdirSync(CONTENT_DIR).filter(f => f.endsWith('.mdx'));
+          
+          // Fetch from all RSS feeds
+          for (const feedUrl of RSS_FEEDS) {
+            try {
+              console.log(`Fetching from: ${feedUrl.trim()}`);
+              const feed = await parser.parseURL(feedUrl.trim());
+              const source = feed.title || new URL(feedUrl).hostname;
+              
+              // Get recent items (last 5)
+              const recentItems = feed.items.slice(0, 5);
+              
+              for (const item of recentItems) {
+                const { frontmatter, slug, title, date } = createMDX(item, source);
+                const filename = `${slug}.mdx`;
+                
+                // Check if already exists
+                if (!existingFiles.includes(filename)) {
+                  allItems.push({ filename, frontmatter, title, date });
+                }
+              }
+            } catch (error) {
+              console.error(`Error fetching ${feedUrl}:`, error.message);
+            }
+          }
+          
+          // Sort by date and take only the 3 most recent new items
+          allItems.sort((a, b) => b.date - a.date);
+          const itemsToCreate = allItems.slice(0, 3);
+          
+          let createdCount = 0;
+          
+          // Create new blog posts
+          for (const item of itemsToCreate) {
+            const filePath = path.join(CONTENT_DIR, item.filename);
+            fs.writeFileSync(filePath, item.frontmatter);
+            console.log(`Created: ${item.title}`);
+            createdCount++;
+          }
+          
+          // Clean up old files (keep only 20 most recent)
+          const allFiles = fs.readdirSync(CONTENT_DIR)
+            .filter(f => f.endsWith('.mdx'))
+            .map(f => ({
+              name: f,
+              path: path.join(CONTENT_DIR, f),
+              stats: fs.statSync(path.join(CONTENT_DIR, f))
+            }))
+            .sort((a, b) => b.stats.mtime - a.stats.mtime);
+          
+          if (allFiles.length > 20) {
+            const filesToDelete = allFiles.slice(20);
+            for (const file of filesToDelete) {
+              fs.unlinkSync(file.path);
+              console.log(`Cleaned up old file: ${file.name}`);
+            }
+          }
+          
+          console.log(`Blog update complete. Created ${createdCount} new posts.`);
+          
+          // Return true if we created any new content
+          return createdCount > 0;
+        }
+        
+        // Run the update
+        updateBlog().then(hasNewContent => {
+          if (hasNewContent) {
+            console.log('New content created. Will trigger deployment.');
+            process.exit(0);
+          } else {
+            console.log('No new content to create.');
+            process.exit(1); // Exit with error code to skip deployment trigger
+          }
+        }).catch(error => {
+          console.error('Error updating blog:', error);
+          process.exit(1);
+        });
+        EOF
+
+    - name: Run blog automation
+      id: blog_update
+      continue-on-error: true
+      env:
+        RSS_FEEDS: ${{ vars.RSS_FEEDS || 'https://pitchfork.com/rss/news/,https://www.rollingstone.com/music/music-news/feed/,https://www.billboard.com/c/music/music-news/feed/,https://www.musictech.net/feed/,https://www.theverge.com/rss/ai/index.xml,https://techcrunch.com/category/artificial-intelligence/feed/' }}
+      run: node auto-blog.js
+
+    - name: Commit new blog posts
+      if: steps.blog_update.outcome == 'success'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add content/blog/
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "feat: automated blog content update $(date +'%Y-%m-%d %H:%M')"
+          git push
+        fi
+
+    - name: Trigger Vercel deployment
+      if: steps.blog_update.outcome == 'success' && vars.VERCEL_DEPLOY_HOOK
+      run: |
+        curl -X POST "${{ vars.VERCEL_DEPLOY_HOOK }}"
+        echo "Deployment hook triggered"

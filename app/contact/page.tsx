@@ -1,4 +1,10 @@
-import BackHome from "../../components/BackHome";
+import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Orinowo - Luxury AI Music Studio",
+  description: "Get in touch with Orinowo for support, partnerships, film scores, runway music, and producer packs. Professional music services available.",
+};
 
 const faqs = [
   {
@@ -66,7 +72,6 @@ export default function ContactPage() {
           ))}
         </ul>
       </div>
-      <BackHome className="mt-10" />
     </section>
   );
 }

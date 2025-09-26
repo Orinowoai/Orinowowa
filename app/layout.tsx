@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ClientNavBar from "../components/ClientNavBar";
 import Footer from "../components/Footer";
+import StructuredData from "../components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Orinowo — Luxury AI Music Studio",
@@ -41,6 +42,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <StructuredData />
+      </head>
       <body className="min-h-screen text-white antialiased">
         <ClientNavBar />
         <main className="relative z-10">{children}</main>

@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="256" height="256" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
- <defs>
- <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
- <stop offset="0%" stop-color="#7C3AED"/>
- <stop offset="100%" stop-color="#22D3EE"/>
- </linearGradient>
- </defs>
- <circle cx="256" cy="256" r="180" fill="url(#g1)"/>
- <rect x="156" y="220" width="200" height="72" rx="36" fill="#0B1220" opacity="0.85"/>
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFC649;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8960A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="32" height="32" fill="#0B0F1A" rx="6"/>
+  
+  <!-- Lady silhouette with headphones (simplified for favicon) -->
+  <g transform="translate(6, 6)">
+    <!-- Head -->
+    <ellipse cx="10" cy="12" rx="6" ry="8" fill="url(#goldGradient)" opacity="0.9"/>
+    
+    <!-- Left headphone -->
+    <ellipse cx="2" cy="12" rx="2" ry="3" fill="url(#goldGradient)"/>
+    
+    <!-- Right headphone -->
+    <ellipse cx="18" cy="12" rx="2" ry="3" fill="url(#goldGradient)"/>
+    
+    <!-- Headphone band -->
+    <path d="M4 8C4 4 6.5 2 10 2C13.5 2 16 4 16 8" 
+          stroke="url(#goldGradient)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Musical note -->
+    <circle cx="14" cy="6" r="1" fill="#FFC649"/>
+    <rect x="13.7" y="7" width="0.6" height="4" fill="#FFC649"/>
+  </g>
 </svg>

@@ -1,5 +1,6 @@
 console.log("✔ Copilot is editing files");
 import type { Metadata } from "next";
+import ImageWithFallback from "../components/ImageWithFallback";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -33,14 +34,11 @@ export default function RootLayout({
         <header className="sticky top-0 z-40 border-b border-deep-700/50 backdrop-blur bg-deep-900/70">
           <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
             <a href="/" className="flex items-center gap-3">
-              <img
+              <ImageWithFallback
                 src="/orinowo-hoodie.png"
                 alt="Orinowo"
                 className="h-8 w-8 rounded-md object-cover ring-2 ring-gold-500/50"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src =
-                    "/orinowo-favicon.svg";
-                }}
+                fallbackSrc="/orinowo-favicon.svg"
               />
               <span className="font-extrabold tracking-wide text-iris-200 drop-shadow-sm">
                 ORINOWO

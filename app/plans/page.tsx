@@ -2,28 +2,28 @@ import { getPlanHref } from "../../lib/payments";
 
 const plans = [
   {
-    key: "FREE",
+    key: "FREE" as const,
     name: "Free",
     price: "$0",
     features: ["Basic access", "Community features"],
     badge: "Popular",
   },
   {
-    key: "STARTER",
+    key: "STARTER" as const,
     name: "Starter",
     price: "$9",
     features: ["Faster renders", "Starter packs"],
     badge: "Value",
   },
   {
-    key: "PRO",
+    key: "PRO" as const,
     name: "Pro",
     price: "$29",
     features: ["Pro packs", "Priority support"],
     badge: "Pro",
   },
   {
-    key: "ELITE",
+    key: "ELITE" as const,
     name: "Elite",
     price: "$99",
     features: ["All features", "Investor-ready"],

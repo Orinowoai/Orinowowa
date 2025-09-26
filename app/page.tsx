@@ -1,42 +1,96 @@
-
-import AvatarRow from "../components/AvatarRow";
-import BackHome from "../components/BackHome";
-
-export default function HomePage() {
+export default function Home() {
+  const initials = [
+    "AL",
+    "SR",
+    "B",
+    "DP",
+    "GA",
+    "AT",
+    "JD",
+    "IH",
+    "BE",
+    "SV",
+    "FL",
+  ];
   return (
-    <main className="max-w-6xl mx-auto px-6 py-10">
-      <section className="rounded-2xl card p-10 mb-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-primary mb-4">
-          Create luxury-grade AI music with playful power.
+    <section className="space-y-10">
+      <div className="card p-8 md:p-12">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-iris-200 tracking-tight">
+          Create luxury-grade AI music with{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FFD166] to-[#FF8A66]">
+            playful power
+          </span>
+          .
         </h1>
-        <p className="max-w-3xl mx-auto text-base text-text/80 mb-6">
+        <p className="mt-3 text-sand/75 max-w-2xl">
           Cinematic AI music, social gamification, and investor-ready features.
         </p>
-        <div className="flex justify-center gap-4 mb-6">
-          <a href="/plans" className="btn btn-primary" aria-label="Go to Plans">Go to Plans</a>
-          <a href="#features" className="btn btn-secondary" aria-label="Start Free">Start Free</a>
+        <div className="mt-6 flex gap-3 flex-wrap">
+          <a href="/plans" className="btn btn-cta">
+            Go to Plans
+          </a>
+          <a
+            href="/plans"
+            className="btn border border-white/10 text-sand/80 hover:text-iris-100"
+          >
+            Start Free
+          </a>
         </div>
-        <AvatarRow />
-      </section>
-      <section id="features" className="grid md:grid-cols-3 gap-8 mb-10">
-        <div className="card flex flex-col items-center p-6">
-          <span className="text-3xl mb-2">⚡</span>
-          <h3 className="font-bold text-lg mb-1">Fast Renders</h3>
-          <p className="text-sm text-text/70">Generate tracks in seconds with luxury-grade AI.</p>
+        <div className="mt-6 flex items-center flex-wrap">
+          {initials.map((t, i) => (
+            <span key={i} className="avatar">
+              {t}
+            </span>
+          ))}
         </div>
-        <div className="card flex flex-col items-center p-6">
-          <span className="text-3xl mb-2">🎛️</span>
-          <h3 className="font-bold text-lg mb-1">Packs & Presets</h3>
-          <p className="text-sm text-text/70">Curated sounds, genres, and creative presets.</p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        <div className="card p-6">
+          <div className="text-sand font-bold"> Fast Renders</div>
+          <p className="text-sand/70 mt-2">
+            Generate tracks in seconds with luxury-grade AI.
+          </p>
         </div>
-        <div className="card flex flex-col items-center p-6">
-          <span className="text-3xl mb-2">🏆</span>
-          <h3 className="font-bold text-lg mb-1">Community Ranking</h3>
-          <p className="text-sm text-text/70">Compete for top spots and prizes every week.</p>
+        <div className="card p-6">
+          <div className="text-sand font-bold"> Packs & Presets</div>
+          <p className="text-sand/70 mt-2">
+            Curated sounds, genres, and creative presets.
+          </p>
         </div>
-      </section>
-      {/* Weekly Songs and Testimonials would be here, using supabase/lib fallback */}
-      <BackHome className="mt-10" />
-    </main>
+        <div className="card p-6">
+          <div className="text-sand font-bold"> Community Ranking</div>
+          <p className="text-sand/70 mt-2">
+            Compete for top spots and prizes every week.
+          </p>
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {[
+          { title: "Luxury & Creativity Collide", img: "/blog1.jpg" },
+          { title: "AI-Imagined Music Futures", img: "/blog2.jpg" },
+          { title: "The Golden Opportunity", img: "/blog3.jpg" },
+        ].map((b, i) => (
+          <article key={i} className="card overflow-hidden">
+            <img
+              src={b.img}
+              alt=""
+              className="h-48 w-full object-cover"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src =
+                  "https://images.unsplash.com/photo-1516280030429-27679b3dc9cf?q=80&w=1200&auto=format";
+              }}
+            />
+            <div className="p-6">
+              <h3 className="text-sand font-semibold">{b.title}</h3>
+              <p className="text-sand/70 mt-2">
+                Explore how Orinowo elevates your sound with cutting-edge AI.
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }

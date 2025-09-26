@@ -9,23 +9,10 @@ const SAMPLE_DATA = {
 export async function GET() {
   let metrics = SAMPLE_DATA;
   let sample = true;
-  if (process.env.STRIPE_SECRET_KEY) {
-    try {
-      const Stripe = (await import("stripe")).default;
-      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-        apiVersion: "2025-08-27.basil",
-      });
-      const customers = await stripe.customers.list({ limit: 1 });
-      metrics = {
-        activeNow: 0,
-        users: customers.data.length,
-        renders: 0,
-      };
-      sample = false;
-    } catch {
-      metrics = SAMPLE_DATA;
-      sample = true;
-    }
-  }
+  // Stripe removed. Always return sample data for metrics.
+  return NextResponse.json(
+    { ok: true, items: [{ id: "sample", metric: 100 }] },
+    { status: 200 },
+  );
   return NextResponse.json({ ...metrics, sample }, { status: 200 });
 }

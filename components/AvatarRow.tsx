@@ -1,19 +1,46 @@
-import React from 'react';
+import React from "react";
 
 const COLORS = [
-  'bg-primary', 'bg-secondary', 'bg-accent', 'bg-success', 'bg-warn', 'bg-danger', 'bg-base', 'bg-surface', 'bg-card',
-  'bg-primary', 'bg-secondary', 'bg-accent',
+  "bg-primary",
+  "bg-secondary",
+  "bg-accent",
+  "bg-success",
+  "bg-warn",
+  "bg-danger",
+  "bg-base",
+  "bg-surface",
+  "bg-card",
+  "bg-primary",
+  "bg-secondary",
+  "bg-accent",
 ];
 
 function getInitials(name: string) {
-  return name.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2);
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 }
 
 export default function AvatarRow({ names = [] }: { names?: string[] }) {
   const fallbackNames = [
-    'Ada Lovelace', 'Sun Ra', 'Bjork', 'Daft Punk', 'Grimes', 'Aphex Twin', 'SOPHIE', 'J Dilla', 'Imogen Heap', 'Brian Eno', 'St. Vincent', 'Flying Lotus',
+    "Ada Lovelace",
+    "Sun Ra",
+    "Bjork",
+    "Daft Punk",
+    "Grimes",
+    "Aphex Twin",
+    "SOPHIE",
+    "J Dilla",
+    "Imogen Heap",
+    "Brian Eno",
+    "St. Vincent",
+    "Flying Lotus",
   ];
-  const displayNames = names && names.length >= 12 ? names.slice(0, 12) : fallbackNames;
+  const displayNames =
+    names && names.length >= 12 ? names.slice(0, 12) : fallbackNames;
   return (
     <div className="flex gap-3 flex-wrap justify-center py-2">
       {displayNames.map((name, i) => (

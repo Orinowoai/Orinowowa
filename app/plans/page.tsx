@@ -1,29 +1,30 @@
 import { getPlanHref } from "../../lib/payments";
+import Link from "next/link";
 
 const plans = [
   {
-    key: "FREE",
+    key: "FREE" as const,
     name: "Free",
     price: "$0",
     features: ["Basic access", "Community features"],
     badge: "Popular",
   },
   {
-    key: "STARTER",
+    key: "STARTER" as const,
     name: "Starter",
     price: "$9",
     features: ["Faster renders", "Starter packs"],
     badge: "Value",
   },
   {
-    key: "PRO",
+    key: "PRO" as const,
     name: "Pro",
     price: "$29",
     features: ["Pro packs", "Priority support"],
     badge: "Pro",
   },
   {
-    key: "ELITE",
+    key: "ELITE" as const,
     name: "Elite",
     price: "$99",
     features: ["All features", "Investor-ready"],
@@ -38,12 +39,12 @@ export default function Plans() {
         <h1 className="text-3xl font-extrabold text-iris-200">
           Choose your plan
         </h1>
-        <a
+        <Link
           href="/"
           className="btn border border-white/10 text-sand/80 hover:text-iris-100"
         >
           ← Back to Home
-        </a>
+        </Link>
       </div>
       <div className="grid md:grid-cols-4 gap-6">
         {plans.map((plan) => {

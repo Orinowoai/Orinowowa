@@ -1,3 +1,6 @@
+"use client";
+import ImageWithFallback from "../components/ImageWithFallback";
+
 export default function Home() {
   const initials = [
     "AL",
@@ -73,14 +76,11 @@ export default function Home() {
           { title: "The Golden Opportunity", img: "/blog3.jpg" },
         ].map((b, i) => (
           <article key={i} className="card overflow-hidden">
-            <img
+            <ImageWithFallback
               src={b.img}
               alt=""
               className="h-48 w-full object-cover"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src =
-                  "https://images.unsplash.com/photo-1516280030429-27679b3dc9cf?q=80&w=1200&auto=format";
-              }}
+              fallbackSrc="https://images.unsplash.com/photo-1516280030429-27679b3dc9cf?q=80&w=1200&auto=format"
             />
             <div className="p-6">
               <h3 className="text-sand font-semibold">{b.title}</h3>

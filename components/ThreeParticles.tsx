@@ -7,15 +7,16 @@ export default function ThreeParticles() {
 
   useEffect(() => {
     if (!mountRef.current) return;
-    const width = mountRef.current.offsetWidth;
-    const height = mountRef.current.offsetHeight;
+    const currentMount = mountRef.current;
+    const width = currentMount.offsetWidth;
+    const height = currentMount.offsetHeight;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.z = 100;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(width, height);
-    mountRef.current.appendChild(renderer.domElement);
+    currentMount.appendChild(renderer.domElement);
 
     const particles = new THREE.BufferGeometry();
     const count = 300;
@@ -36,7 +37,9 @@ export default function ThreeParticles() {
     animate();
 
     return () => {
-      mountRef.current?.removeChild(renderer.domElement);
+      if (currentMount && currentMount.contains(renderer.domElement)) {
+        currentMount.removeChild(renderer.domElement);
+      }
     };
   }, []);
 

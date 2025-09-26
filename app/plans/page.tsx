@@ -1,4 +1,5 @@
 import { getPlanHref } from "../../lib/payments";
+import Link from "next/link";
 
 const plans = [
   {
@@ -38,12 +39,12 @@ export default function Plans() {
         <h1 className="text-3xl font-extrabold text-iris-200">
           Choose your plan
         </h1>
-        <a
+        <Link
           href="/"
           className="btn border border-white/10 text-sand/80 hover:text-iris-100"
         >
           ← Back to Home
-        </a>
+        </Link>
       </div>
       <div className="grid md:grid-cols-4 gap-6">
         {plans.map((plan) => {

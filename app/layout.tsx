@@ -1,5 +1,6 @@
 console.log("✔ Copilot is editing files");
 import type { Metadata } from "next";
+import Link from "next/link";
 import ImageWithFallback from "../components/ImageWithFallback";
 import "./globals.css";
 
@@ -33,7 +34,7 @@ export default function RootLayout({
       <body className="min-h-dvh bg-gradient-to-b from-deep-900 via-deep-800 to-deep-900">
         <header className="sticky top-0 z-40 border-b border-deep-700/50 backdrop-blur bg-deep-900/70">
           <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-            <a href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <ImageWithFallback
                 src="/orinowo-hoodie.png"
                 alt="Orinowo"
@@ -43,11 +44,11 @@ export default function RootLayout({
               <span className="font-extrabold tracking-wide text-iris-200 drop-shadow-sm">
                 ORINOWO
               </span>
-            </a>
+            </Link>
             <nav className="hidden md:flex items-center gap-6 text-sm">
-              <a href="/" className="nav-link">
+              <Link href="/" className="nav-link">
                 Home
-              </a>
+              </Link>
               <a href="/leaderboard" className="nav-link">
                 Leaderboard
               </a>

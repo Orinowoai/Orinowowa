@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import BackHome from "../../components/BackHome";
 
 export default function Success() {
@@ -20,9 +21,9 @@ export default function Success() {
       <p className="mt-2 text-sm text-text/80">
         Enjoy premium features. You’re officially VIP.
       </p>
-      <a href="/" className="mt-4 btn btn-accent">
+      <Link href="/" className="mt-4 btn btn-accent">
         Go to studio
-      </a>
+      </Link>
       <BackHome className="mt-6" />
     </main>
   );
